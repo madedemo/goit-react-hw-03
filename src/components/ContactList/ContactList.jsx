@@ -2,21 +2,20 @@ import css from './ContactList.module.css';
 import Contact from "../Contact/Contact";
 
 
-const ContactList = ({ contacts, onDeleteContact }) => {
-  const handleDelete = id => {
-    onDeleteContact(id);
-  };
-
+const ContactList = ({ users, onUserDelete }) => {
   return (
-    <ul className={css.contactList}>
-      {contacts.map(contact => (
-        <li key={contact.id}>
-          <Contact {...contact} />
-          <button onClick={() => handleDelete(contact.id)}>Delete</button>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className={css.contactList}>
+        {Array.isArray(users) &&
+          users.map((user) => {
+            return (
+              <Contact key={user.id} user={user} onUserDelete={onUserDelete} />
+            );
+          })}
+      </ul>
+    </div>
   );
 };
+
 
 export default ContactList;
